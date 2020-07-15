@@ -123,7 +123,7 @@ Page {
 			width: parent.width
 
 			anchors.leftMargin: 4
-			anchors.rightMargin: scrollbar.width
+			anchors.rightMargin: 4
 
 			model: timelineManager.timeline
 
@@ -168,12 +168,12 @@ Page {
 				anchors.bottom: chat.bottom
 			}
 
-			spacing: 4
+			spacing: fontMetrics.height * 0.4
 			verticalLayoutDirection: ListView.BottomToTop
 
 			onCountChanged: if (atYEnd) model.currentIndex = 0 // Mark last event as read, since we are at the bottom
 
-			property int delegateMaxWidth: (settings.timelineMaxWidth > 100 && (parent.width - settings.timelineMaxWidth) > 32) ? settings.timelineMaxWidth : (parent.width - 32)
+			property int delegateMaxWidth: (settings.timelineMaxWidth > 100 && (parent.width - settings.timelineMaxWidth) > 32 + scrollbar.width) ? settings.timelineMaxWidth : (parent.width - 32 - scrollbar.width)
 
 			delegate: Rectangle {
 				// This would normally be previousSection, but our model's order is inverted.
@@ -225,14 +225,14 @@ Page {
 					property string section
 					property string nextSection
 
-					topPadding: 4
+					topPadding: fontMetrics.height * 0.8
 					bottomPadding: 4
 					spacing: 8
 
 					visible: !!modelData
 
 					width: parent.width
-					height: (section.includes(" ") ? dateBubble.height + 8 + userName.height : userName.height) + 8
+					height: (section.includes(" ") ? dateBubble.height + 8 + userName.height : userName.height) + 8 + (fontMetrics.height * 0.8)
 
 					Label {
 						id: dateBubble
@@ -302,12 +302,12 @@ Page {
                 width: 50
                 z: 3
             }
-		}
+		} 
 
 		Rectangle {
 			id: chatFooter
 
-			height: Math.max(fontMetrics.height * 1.2, footerContent.height)
+			height: Math.max(fontMetrics.height * 2, footerContent.height)
 			anchors.left: parent.left
 			anchors.right: parent.right
 			anchors.bottom: parent.bottom
@@ -319,6 +319,9 @@ Page {
 				id: footerContent
 				anchors.left: parent.left
 				anchors.right: parent.right
+				anchors.bottom: parent.bottom
+				
+				height: Math.max(fontMetrics.height * 1.4, footerContent.height)
 
 				Label {
 					id: typingDisplay
@@ -326,6 +329,7 @@ Page {
 					anchors.right: parent.right
 					anchors.leftMargin: 10
 					anchors.rightMargin: 10
+					anchors.bottomMargin: 14
 
 					color: colors.text
 					text: chat.model ? chat.model.formatTypingUsers(chat.model.typingUsers, colors.window) : ""

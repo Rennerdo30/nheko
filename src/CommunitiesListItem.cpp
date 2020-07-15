@@ -1,5 +1,6 @@
 #include "CommunitiesListItem.h"
 
+#include <QBitmap>
 #include <QMouseEvent>
 
 #include "Utils.h"
@@ -98,8 +99,17 @@ CommunitiesListItem::paintEvent(QPaintEvent *)
                                    IconSize);
         } else {
                 p.save();
+                if (groupId_ == "world" || groupId_.startsWith("tag:"))
+                {
+                        auto mask = avatar_.mask();
+                        mask.setDevicePixelRatio(avatar_.devicePixelRatio());
+                        avatar_.fill(avatarFgColor_);
+                        avatar_.setMask(mask);
 
-                p.drawAvatar(avatar_, width(), height(), IconSize);
+                        p.drawAvatar(avatar_, width(), height(), IconSize);
+                } else {
+                        p.drawAvatar(avatar_, width(), height(), IconSize);
+                }
                 p.restore();
         }
 }

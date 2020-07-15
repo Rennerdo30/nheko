@@ -90,7 +90,7 @@ UserMentionsWidget {
     qproperty-mentionedColor: palette(alternate-base);
     qproperty-highlightedBackgroundColor: palette(highlight);
     qproperty-hoverBackgroundColor: palette(light);
-    qproperty-backgroundColor: palette(window);
+    qproperty-backgroundColor: palette(alternate-base);
 
     qproperty-titleColor: palette(text);
     qproperty-subtitleColor: palette(text);
@@ -98,15 +98,15 @@ UserMentionsWidget {
     qproperty-highlightedTitleColor: palette(highlighted-text);
     qproperty-highlightedSubtitleColor: palette(highlighted-text);
 
-    qproperty-hoverTitleColor: palette(dark);
-    qproperty-hoverSubtitleColor: palette(dark);
+    qproperty-hoverTitleColor: palette(highlighted-text);
+    qproperty-hoverSubtitleColor: palette(highlighted-text);
 
     qproperty-btnColor: palette(dark);
     qproperty-btnTextColor: palette(bright-text);
 
     qproperty-timestampColor: palette(text);
     qproperty-highlightedTimestampColor: palette(highlighted-text);
-    qproperty-hoverTimestampColor: palette(dark);
+    qproperty-hoverTimestampColor: palette(highlighted-text);
 
     qproperty-bubbleBgColor: palette(base);
     qproperty-bubbleFgColor: palette(text);
